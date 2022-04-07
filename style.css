@@ -6,6 +6,11 @@
 }
 /* variables */
 /*  https://nasratt.github.io/frontendMentorSolutions/projects/todoList/ */
+:root {
+  --mainFontFamily: "Josefin Sans", arial, sans-serif;
+  --varcolor: red;
+}
+
 .lnr {
   font-size: 40px;
 }
