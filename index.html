@@ -5,6 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <header class="header__container">
+      <h1 class="header_title">TO DO</h1>
+      <div class="theme_icons_container">
+        <span class="lnr lnr-moon"></span>
+        <span class="lnr lnr-sun"></span>
+      </div>
+      <form class="form_container">
+        <input type="text" class="form_input" placeholder="Create a new task" />
+        <button type="submit" class="form_btn">Add task</button>
+      </form>
+    </header>
+    <main class="content__contaier">
+      <section class="tasks__container">
+        <div class="todo_container">
+          <h2>Fill tasks list</h2>
+          <ul class="todo_list"></ul>
+        </div>
+        <div class="todo_info">
+          <p class="todo_counter">
+            <span class="todo_counter_value">0</span> items left
+          </p>
+          <button class="todo_clear_btn">Clear</button>
+        </div>
+      </section>
+      <section class="filter__container">
+        <button class="filter_btn add">All</button>
+        <button class="filter_btn active">Active</button>
+        <button class="filter_btn completed">Completed</button>
+      </section>
+    </main>
+    <footer class="footer__container">
+      <p class="footer_info">Copyright jkDev</p>
+    </footer>
+  </body>
 </html>

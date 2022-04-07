@@ -5,3 +5,7 @@
   box-sizing: border-box;
 }
 /* variables */
+/*  https://nasratt.github.io/frontendMentorSolutions/projects/todoList/ */
+.lnr {
+  font-size: 40px;
+}
