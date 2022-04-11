@@ -8,7 +8,7 @@
 /*  https://nasratt.github.io/frontendMentorSolutions/projects/todoList/ */
 :root {
   --mainFontFamily: "Josefin Sans", arial, sans-serif;
-  --formFontColor: rgb(202, 205, 232);
+  --brightFontColor: rgb(202, 205, 232);
   --elementsFontColor: rgb(119, 122, 146);
   --elementsBGC: rgb(21, 22, 32);
   --backgroundBGC: rgb(0, 0, 0);
@@ -22,8 +22,10 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
+  min-height: 100vh;
+  background-color: var(--backgroundBGC);
 }
 .header {
   display: flex;
@@ -33,9 +35,11 @@ body {
   flex-wrap: wrap;
   width: 90%;
   padding: 26px 0;
-  background-color: red;
+  /* background-color: rgba(255, 0, 0, 0.4); */
 }
-.header__title {
+.header__title,
+.lnr {
+  color: white;
   /* background-color: blue; */
 }
 .header__theme-icons-container {
@@ -65,7 +69,7 @@ body {
 .header__form-btn {
   font-family: var(--mainFontFamily);
   font-size: 1em;
-  color: var(--formFontColor);
+  color: var(--brightFontColor);
   border: none;
 }
 .header__form-input {
@@ -89,4 +93,60 @@ body {
 }
 .content {
   width: 90%;
+}
+.content__tasks-container {
+  position: relative;
+  background-color: var(--elementsBGC);
+  border: 2px solid var(--elementsBGC);
+  border-radius: 5px;
+}
+
+.content__title,
+.content__todo-info,
+.content__filter-container {
+  max-height: 10vh;
+}
+.content__title {
+  padding: 16px;
+  text-align: center;
+  /* background-color: #fff; */
+  color: var(--brightFontColor);
+}
+.content__todo-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 12px;
+  border-top: 1px solid #393a4c;
+  /* background-color: #fff; */
+  color: var(--elementsFontColor);
+}
+.content__todo-btn {
+  color: var(--elementsFontColor);
+  border: none;
+  background-color: transparent;
+  padding: 6px 20px;
+  font-size: 1em;
+  font-family: var(--mainFontFamily);
+}
+.content__todo-btn:hover {
+  cursor: pointer;
+  color: rgb(83, 83, 200);
+}
+.content__filter-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 12px;
+  margin-top: 20px;
+  border: 2px solid var(--elementsBGC);
+  border-radius: 5px;
+  background-color: var(--elementsBGC);
+}
+.footer {
+  color: white;
+  padding-bottom: 10px;
+  align-self: flex-end;
 }
