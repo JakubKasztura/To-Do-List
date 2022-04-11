@@ -9,6 +9,13 @@
       rel="stylesheet"
       href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="style.css" />
     <script src="todo.js" defer></script>
   </head>
@@ -16,7 +23,7 @@
     <header class="header">
       <h1 class="header__title">TO DO</h1>
       <div class="header__theme-icons-container">
-        <span class="lnr lnr-moon"></span>
+        <span class="lnr lnr-moon lnr--disabled"></span>
         <span class="lnr lnr-sun"></span>
       </div>
       <form class="header__form-container">
@@ -25,7 +32,7 @@
           class="header__form-input"
           placeholder="Create a new task"
         />
-        <button type="submit" class="header__form-btn">Add task</button>
+        <button type="submit" class="header__form-btn">Add</button>
       </form>
     </header>
     <main class="content">

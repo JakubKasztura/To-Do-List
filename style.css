@@ -8,9 +8,85 @@
 /*  https://nasratt.github.io/frontendMentorSolutions/projects/todoList/ */
 :root {
   --mainFontFamily: "Josefin Sans", arial, sans-serif;
+  --formFontColor: rgb(202, 205, 232);
+  --elementsFontColor: rgb(119, 122, 146);
+  --elementsBGC: rgb(21, 22, 32);
+  --backgroundBGC: rgb(0, 0, 0);
   --varcolor: red;
 }
 
+html {
+  font-family: var(--mainFontFamily);
+}
+body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 90%;
+  padding: 26px 0;
+  background-color: red;
+}
+.header__title {
+  /* background-color: blue; */
+}
+.header__theme-icons-container {
+  position: relative;
+  /* background-color: yellow; */
+}
 .lnr {
-  font-size: 40px;
+  display: block;
+  font-size: 2em;
+}
+.lnr--disabled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+.header__form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+  border: 2px solid var(--elementsBGC);
+  border-radius: 5px;
+}
+.header__form-input,
+.header__form-btn {
+  font-family: var(--mainFontFamily);
+  font-size: 1em;
+  color: var(--formFontColor);
+  border: none;
+}
+.header__form-input {
+  width: 75%;
+  padding: 12px;
+  background-color: var(--elementsBGC);
+
+  /* Not turning off outline to have better accessibility for people with eye problems */
+}
+.header__form-input:focus {
+  outline: rgba(208, 206, 206, 0.4) solid;
+  outline-offset: -2px;
+  /* Think if not change it without :focus */
+}
+.header__form-btn {
+  width: 25%;
+  background-color: var(--backgroundBGC);
+}
+.header__form-btn:hover {
+  cursor: pointer;
+}
+.content {
+  width: 90%;
 }
