@@ -7,74 +7,71 @@
   flex-wrap: wrap;
   width: 90%;
   padding: 36px 0;
-
   /* background-color: rgba(255, 0, 0, 0.4); */
-}
-.header::before {
-  content: "";
-  display: block;
-  position: absolute;
-  background-image: url(/images/bgc.webp);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  top: 0;
-  left: -5vw;
-  width: 100vw;
-  height: 120%;
-  z-index: -1;
-}
-.header__title,
-.lnr {
-  color: white;
-  /* background-color: blue; */
-}
-.header__theme-icons-container {
-  position: relative;
-  /* background-color: yellow; */
-}
-.lnr {
-  display: block;
-  font-size: 2em;
-}
-.lnr--disabled {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: none;
-}
-.header__form-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 20px;
-  border: 2px solid $elementsBGC;
-  border-radius: 5px;
-}
-.header__form-input,
-.header__form-btn {
-  font-family: $mainFontFamily;
-  font-size: 1em;
-  color: $brightFontColor;
-  border: none;
-}
-.header__form-input {
-  width: 75%;
-  padding: 12px;
-  background-color: $elementsBGC;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    background-image: url(/images/bgc.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    top: 0;
+    left: -5vw;
+    width: 100vw;
+    height: 120%;
+    z-index: -1;
+  }
+  &__title,
+  & .lnr {
+    color: white;
+  }
+  &__theme-icons-container {
+    position: relative;
+  }
+  & .lnr {
+    display: block;
+    font-size: 2em;
+    &--disabled {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+    }
+  }
+  &__form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+    border: 2px solid $elementsBGC;
+    border-radius: 5px;
+  }
+  &__form-input,
+  &__form-btn {
+    font-family: $mainFontFamily;
+    font-size: 1em;
+    color: $brightFontColor;
+    border: none;
+  }
+  &__form-input {
+    width: 75%;
+    padding: 12px;
+    background-color: $elementsBGC;
 
-  /* Not turning off outline to have better accessibility for people with eye problems */
-}
-.header__form-input:focus {
-  outline: rgba(208, 206, 206, 0.4) solid;
-  outline-offset: -2px;
-  /* Think if not change it without :focus */
-}
-.header__form-btn {
-  width: 25%;
-  background-color: $backgroundBGC;
-}
-.header__form-btn:hover {
-  cursor: pointer;
+    /* Not turning off outline to have better accessibility for people with eye problems */
+    &:focus {
+      outline: rgba(208, 206, 206, 0.4) solid;
+      outline-offset: -2px;
+      /* Think if not change it without :focus */
+    }
+  }
+  &__form-btn {
+    width: 25%;
+    background-color: $backgroundBGC;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

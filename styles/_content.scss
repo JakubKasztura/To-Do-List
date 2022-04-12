@@ -1,54 +1,53 @@
 .content {
   width: 90%;
-}
-.content__tasks-container {
-  position: relative;
-  background-color: $elementsBGC;
-  border: 2px solid $elementsBGC;
-  border-radius: 5px;
-}
-
-.content__title,
-.content__todo-info,
-.content__filter-container {
-  max-height: 10vh;
-}
-.content__title {
-  padding: 16px;
-  text-align: center;
-  /* background-color: #fff; */
-  color: $brightFontColor;
-}
-.content__todo-info {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 12px;
-  border-top: 1px solid #393a4c;
-  /* background-color: #fff; */
-  color: $elementsFontColor;
-}
-.content__todo-btn {
-  color: $elementsFontColor;
-  border: none;
-  background-color: transparent;
-  padding: 6px 20px;
-  font-size: 1em;
-  font-family: $mainFontFamily;
-}
-.content__todo-btn:hover {
-  cursor: pointer;
-  color: rgb(83, 83, 200);
-}
-.content__filter-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  padding: 16px 12px;
-  margin-top: 20px;
-  border: 2px solid $elementsBGC;
-  border-radius: 5px;
-  background-color: $elementsBGC;
+  &__tasks-container {
+    position: relative;
+    background-color: $elementsBGC;
+    border: 2px solid $elementsBGC;
+    border-radius: 5px;
+  }
+  &__title,
+  &__todo-info,
+  &__filter-container {
+    max-height: 10vh;
+  }
+  &__title {
+    padding: 16px;
+    text-align: center;
+    /* background-color: #fff; */
+    color: $brightFontColor;
+  }
+  &__todo-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 12px;
+    border-top: 1px solid #393a4c;
+    /* background-color: #fff; */
+    color: $elementsFontColor;
+  }
+  &__todo-btn {
+    color: $elementsFontColor;
+    border: none;
+    background-color: transparent;
+    padding: 6px 20px;
+    font-size: 1em;
+    font-family: $mainFontFamily;
+    &:hover {
+      cursor: pointer;
+      color: rgb(83, 83, 200);
+    }
+  }
+  &__filter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 16px 12px;
+    margin-top: 20px;
+    border: 2px solid $elementsBGC;
+    border-radius: 5px;
+    background-color: $elementsBGC;
+  }
 }
