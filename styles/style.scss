@@ -1,0 +1,28 @@
+// import styles for each section//
+@import "variables";
+@import "header";
+@import "content";
+@import "footer";
+
+/* standard style reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* variables */
+/*  project according to - https://nasratt.github.io/frontendMentorSolutions/projects/todoList/ */
+
+html {
+  font-family: $mainFontFamily;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100vh;
+  background-color: $backgroundBGC;
+  overflow: hidden;
+}
