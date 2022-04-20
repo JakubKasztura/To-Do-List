@@ -1,16 +1,16 @@
 .content {
-  width: 90%;
+  width: $elementWidthSmallMobile;
   &__tasks-container {
-    position: relative;
+    // position: relative;
     background-color: $elementsBGC;
     border: 2px solid $elementsBGC;
     border-radius: 5px;
   }
-  &__title,
-  &__todo-info,
-  &__filter-container {
-    max-height: 10vh;
-  }
+  // &__title,
+  // &__todo-info,
+  // &__filter-container {
+  //   max-height: 10vh;
+  // }
   &__title {
     padding: 16px;
     text-align: center;
@@ -49,5 +49,11 @@
     border: 2px solid $elementsBGC;
     border-radius: 5px;
     background-color: $elementsBGC;
+  }
+}
+/*mobile changes */
+@media (min-width: 768px) {
+  .content {
+    width: $elementMinWidth768px;
   }
 }

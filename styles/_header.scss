@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  width: 90%;
+  width: $elementWidthSmallMobile;
   padding: 36px 0;
   /* background-color: rgba(255, 0, 0, 0.4); */
   &::before {
@@ -17,7 +17,7 @@
     background-size: cover;
     background-position: center center;
     top: 0;
-    left: -5vw;
+    left: calc(#{$elementWidthSmallMobile} - 95vw);
     width: 100vw;
     height: 120%;
     z-index: -1;
@@ -47,6 +47,7 @@
     margin-top: 20px;
     border: 2px solid $elementsBGC;
     border-radius: 5px;
+    background-color: $elementsBGC;
   }
   &__form-input,
   &__form-btn {
@@ -56,22 +57,33 @@
     border: none;
   }
   &__form-input {
-    width: 75%;
+    flex-grow: 2;
     padding: 12px;
-    background-color: $elementsBGC;
+    background-color: transparent;
 
     /* Not turning off outline to have better accessibility for people with eye problems */
     &:focus {
       outline: rgba(208, 206, 206, 0.4) solid;
       outline-offset: -2px;
+      border-radius: 3px;
+      /* 5px radius from container - 2px width of border*/
       /* Think if not change it without :focus */
     }
   }
   &__form-btn {
-    width: 25%;
+    flex-grow: 1;
     background-color: $backgroundBGC;
     &:hover {
       cursor: pointer;
+    }
+  }
+}
+/*mobile changes*/
+@media (min-width: 768px) {
+  .header {
+    width: $elementMinWidth768px;
+    &::before {
+      left: calc(#{$elementMinWidth768px} - 85vw);
     }
   }
 }
