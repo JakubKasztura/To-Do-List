@@ -16,7 +16,7 @@
 html {
   font-family: $mainFontFamily;
 }
-body {
+.wrapper {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -26,13 +26,7 @@ body {
   background-color: $backgroundBGC;
   overflow: hidden;
 }
-div.wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
-  min-height: 100vh;
-  background-color: $backgroundBGC;
-  overflow: hidden;
+.header,
+.content {
+  z-index: 1;
 }

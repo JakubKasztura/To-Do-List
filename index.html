@@ -20,48 +20,50 @@
     <script src="todo.js" defer></script>
   </head>
   <body>
-    <header class="header">
-      <h1 class="header__title">TO DO</h1>
-      <div class="header__theme-icons-container">
-        <span class="lnr lnr-moon lnr--disabled"></span>
-        <span class="lnr lnr-sun"></span>
-      </div>
-      <form class="header__form-container">
-        <input
-          type="text"
-          class="header__form-input"
-          placeholder="Create a new task"
-        />
-        <button type="submit" class="header__form-btn">Add</button>
-      </form>
-    </header>
-    <main class="content">
-      <section class="content__tasks-container">
-        <div class="content__todo-container">
-          <h2 class="content__title">Fill tasks list</h2>
-          <ul class="content__todo-list"></ul>
+    <div class="wrapper">
+      <header class="header">
+        <h1 class="header__title">TO DO</h1>
+        <div class="header__theme-icons-container">
+          <span class="lnr lnr-moon lnr--disabled"></span>
+          <span class="lnr lnr-sun"></span>
         </div>
-        <div class="content__todo-info">
-          <p class="content__todo-counter">
-            <span class="content__todo-counter--value">0</span> items left
-          </p>
-          <button class="content__todo-btn content__todo-btn--clear">
-            Clear items
+        <form class="header__form-container">
+          <input
+            type="text"
+            class="header__form-input"
+            placeholder="Create a new task"
+          />
+          <button type="submit" class="header__form-btn">Add</button>
+        </form>
+      </header>
+      <main class="content">
+        <section class="content__tasks-container">
+          <div class="content__todo-container">
+            <h2 class="content__title">Fill tasks list</h2>
+            <ul class="content__todo-list"></ul>
+          </div>
+          <div class="content__todo-info">
+            <p class="content__todo-counter">
+              <span class="content__todo-counter--value">0</span> items left
+            </p>
+            <button class="content__todo-btn content__todo-btn--clear">
+              Clear items
+            </button>
+          </div>
+        </section>
+        <section class="content__filter-container">
+          <button class="content__todo-btn content__todo-btn--all">All</button>
+          <button class="content__todo-btn content__todo-btn--active">
+            Active
           </button>
-        </div>
-      </section>
-      <section class="content__filter-container">
-        <button class="content__todo-btn content__todo-btn--all">All</button>
-        <button class="content__todo-btn content__todo-btn--active">
-          Active
-        </button>
-        <button class="content__todo-btn content__todo-btn--completed">
-          Completed
-        </button>
-      </section>
-    </main>
-    <footer class="footer">
-      <p class="footer__info">Copyright jkDev</p>
-    </footer>
+          <button class="content__todo-btn content__todo-btn--completed">
+            Completed
+          </button>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__info">Copyright jkDev</p>
+      </footer>
+    </div>
   </body>
 </html>
