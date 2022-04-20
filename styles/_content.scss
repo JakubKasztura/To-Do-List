@@ -17,6 +17,19 @@
     /* background-color: #fff; */
     color: $brightFontColor;
   }
+  &__todo-list {
+    margin: 0 20px 5px;
+    list-style: none;
+    color: $brightFontColor;
+    &-task {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      font-size: 1.2em;
+    }
+  }
   &__todo-info {
     display: flex;
     flex-direction: row;
@@ -54,6 +67,21 @@
 /*mobile changes */
 @media (min-width: 768px) {
   .content {
-    width: $elementMinWidth768px;
+    width: $elementMinWindowWidth768px;
+  }
+}
+@media (min-width: 992px) {
+  .content {
+    width: $elementMinWindowWidth992px;
+  }
+}
+@media (min-width: 1200px) {
+  .content {
+    width: $elementMinWindowWidth1200px;
+  }
+}
+@media (min-width: 1400px) {
+  .content {
+    width: $elementMinWindowWidth1400px;
   }
 }

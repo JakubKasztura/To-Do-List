@@ -81,9 +81,34 @@
 /*mobile changes*/
 @media (min-width: 768px) {
   .header {
-    width: $elementMinWidth768px;
+    width: $elementMinWindowWidth768px;
     &::before {
-      left: calc(#{$elementMinWidth768px} - 85vw);
+      left: calc(#{$elementMinWindowWidth768px} - 85vw);
+    }
+  }
+}
+/* desktop changes*/
+@media (min-width: 992px) {
+  .header {
+    width: $elementMinWindowWidth992px;
+    &::before {
+      left: calc(#{$elementMinWindowWidth992px} - 80vw);
+    }
+  }
+}
+@media (min-width: 1200px) {
+  .header {
+    width: $elementMinWindowWidth1200px;
+    &::before {
+      left: calc(#{$elementMinWindowWidth1200px} - 75vw);
+    }
+  }
+}
+@media (min-width: 1400px) {
+  .header {
+    width: $elementMinWindowWidth1400px;
+    &::before {
+      left: calc(#{$elementMinWindowWidth1400px} - 70vw);
     }
   }
 }

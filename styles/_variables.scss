@@ -4,4 +4,7 @@ $elementsFontColor: rgb(119, 122, 146);
 $elementsBGC: rgb(21, 22, 32);
 $backgroundBGC: rgb(0, 0, 0);
 $elementWidthSmallMobile: 90vw;
-$elementMinWidth768px: 70vw;
+$elementMinWindowWidth768px: 70vw;
+$elementMinWindowWidth992px: 60vw;
+$elementMinWindowWidth1200px: 50vw;
+$elementMinWindowWidth1400px: 40vw;
