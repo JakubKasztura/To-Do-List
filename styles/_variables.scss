@@ -1,6 +1,13 @@
 $mainFontFamily: "Josefin Sans", arial, sans-serif;
 $brightFontColor: rgb(202, 205, 232);
 $elementsFontColor: rgb(119, 122, 146);
+$elementsBorderColor: rgb(57, 58, 76);
+$checkBoxColorGradient: linear-gradient(
+  0deg,
+  rgba(123, 212, 238, 1) 8%,
+  rgba(153, 122, 240, 1) 40%,
+  rgba(173, 23, 236, 1) 80%
+);
 $elementsBGC: rgb(21, 22, 32);
 $backgroundBGC: rgb(0, 0, 0);
 $elementWidthSmallMobile: 90vw;

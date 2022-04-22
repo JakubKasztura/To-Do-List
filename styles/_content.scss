@@ -18,25 +18,55 @@
     color: $brightFontColor;
   }
   &__todo-list {
-    margin: 0 20px 5px;
     list-style: none;
     color: $brightFontColor;
     &-task {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
-      padding: 10px 0;
+      word-break: break-word;
+      border-bottom: 1px solid $elementsBorderColor;
+      padding: 10px 20px;
       font-size: 1.2em;
+      &-checkbox {
+        position: relative;
+        margin-right: 15px;
+      }
+      &-checkbox:hover::before {
+        cursor: pointer;
+        border-color: rgb(173, 23, 236);
+      }
+      &-checkbox::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: -30%;
+        left: -25%;
+        background-color: $elementsBGC;
+        border: 1px solid $elementsBorderColor;
+        border-radius: 50%;
+        width: 140%;
+        height: 140%;
+      }
+
+      &-checkbox:checked::before {
+        background: rgb(123, 212, 238);
+        background: $checkBoxColorGradient;
+      }
+      & .lnr-trash {
+        margin-left: auto;
+      }
     }
   }
+
   &__todo-info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 16px 12px;
-    border-top: 1px solid #393a4c;
+    border-top: 1px solid $elementsBorderColor;
     /* background-color: #fff; */
     color: $elementsFontColor;
   }
