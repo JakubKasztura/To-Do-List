@@ -56,11 +56,14 @@
       }
       &-text {
         position: relative;
-        &--disabled {
+        &.disabled {
           position: relative;
           color: $elementsFontColor;
         }
-        &-cancel-line--active {
+        &-cancel-line {
+          display: none;
+        }
+        &-cancel-line.active {
           display: block;
           position: absolute;
           top: 50%;
@@ -69,9 +72,6 @@
           width: 100%;
           transform: translateY(-50%);
           background-color: $elementsFontColor;
-        }
-        &-cancel-line--disabled {
-          display: none;
         }
       }
 

@@ -13,7 +13,7 @@ class Task {
     taskElement.classList.add("content__todo-list-task");
     taskElement.innerHTML = `<input type="checkbox" class="content__todo-list-task-checkbox">
     <span class="content__todo-list-task-text">${this.text}
-    <span class="content__todo-list-task-text-cancel-line--disabled"></span> 
+    <span class="content__todo-list-task-text-cancel-line"></span> 
     </span>
     
     <span class="lnr lnr-trash"></span>`;
@@ -43,8 +43,9 @@ const tasksCounter = function () {
   taskListArray.forEach((task, index) => {
     const checkbox = task.querySelector(".content__todo-list-task-checkbox");
     const cancelLine = task.querySelector(
-      ".content__todo-list-task-text-cancel-line--disabled"
+      ".content__todo-list-task-text-cancel-line"
     );
+    console.log(cancelLine);
     const taskText = task.querySelector(".content__todo-list-task-text");
     if (checkbox.checked) {
       counter++;
@@ -52,18 +53,15 @@ const tasksCounter = function () {
     todoCounter.textContent = taskListArray.length - counter;
     checkbox.addEventListener("click", function () {
       if (checkbox.checked) {
-        console.log(cancelLine); // something wrong with class syntax mby wrong nesting ???
-        cancelLine.className =
-          "content__todo-list-task-text-cancel-line--active";
-        taskText.className = "content__todo-list-task-text--disabled";
+        cancelLine.classList.toggle("active");
+        taskText.classList.toggle("disabled");
         taskListObjArray[index].status = "completed";
         counter++;
         todoCounter.textContent = taskListArray.length - counter;
       } else {
         if (cancelLine) {
-          cancelLine.className =
-            "content__todo-list-task-text-cancel-line--disabled";
-          taskText.className = "content__todo-list-task-text";
+          cancelLine.classList.toggle("active");
+          taskText.classList.toggle("disabled");
         }
 
         taskListObjArray[index].status = "active";
