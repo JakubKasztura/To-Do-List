@@ -45,7 +45,6 @@ const tasksCounter = function () {
     const cancelLine = task.querySelector(
       ".content__todo-list-task-text-cancel-line"
     );
-    console.log(cancelLine);
     const taskText = task.querySelector(".content__todo-list-task-text");
     if (checkbox.checked) {
       counter++;
@@ -53,20 +52,22 @@ const tasksCounter = function () {
     todoCounter.textContent = taskListArray.length - counter;
     checkbox.addEventListener("click", function () {
       if (checkbox.checked) {
-        cancelLine.classList.toggle("active");
-        taskText.classList.toggle("disabled");
+        cancelLine.classList.add("active");
+        taskText.classList.add("disabled");
         taskListObjArray[index].status = "completed";
         counter++;
         todoCounter.textContent = taskListArray.length - counter;
+        console.log(taskListObjArray);
       } else {
         if (cancelLine) {
-          cancelLine.classList.toggle("active");
-          taskText.classList.toggle("disabled");
+          cancelLine.classList.remove("active");
+          taskText.classList.remove("disabled");
         }
 
         taskListObjArray[index].status = "active";
         counter--;
         todoCounter.textContent = taskListArray.length - counter;
+        console.log(taskListObjArray);
       }
     });
   });
