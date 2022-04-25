@@ -54,6 +54,27 @@
         background: rgb(123, 212, 238);
         background: $checkBoxColorGradient;
       }
+      &-text {
+        position: relative;
+        &--disabled {
+          position: relative;
+          color: $elementsFontColor;
+        }
+        &-cancel-line--active {
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          height: 2px;
+          width: 100%;
+          transform: translateY(-50%);
+          background-color: $elementsFontColor;
+        }
+        &-cancel-line--disabled {
+          display: none;
+        }
+      }
+
       & .lnr-trash {
         margin-left: auto;
       }
