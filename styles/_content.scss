@@ -62,21 +62,22 @@
         }
         &-cancel-line {
           display: none;
-        }
-        &-cancel-line.active {
-          display: block;
-          position: absolute;
-          top: 50%;
-          left: 0;
-          height: 2px;
-          width: 100%;
-          transform: translateY(-50%);
-          background-color: $elementsFontColor;
+          &.active {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 2px;
+            width: 100%;
+            transform: translateY(-50%);
+            background-color: $elementsFontColor;
+          }
         }
       }
 
       & .lnr-trash {
         margin-left: auto;
+        cursor: pointer;
       }
     }
   }

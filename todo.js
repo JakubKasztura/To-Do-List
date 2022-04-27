@@ -1,8 +1,9 @@
 const addTaskBtn = document.querySelector(".header__form-btn"),
-  taskList = document.querySelector(".content__todo-list"),
-  taskListArray = [],
   taskListObjArray = [],
   clearAllItemsBtn = document.querySelector(".content__todo-btn--clear");
+
+let taskListArray = [],
+  taskList = document.querySelector(".content__todo-list");
 class Task {
   constructor(text) {
     this.text = text;
@@ -17,7 +18,7 @@ class Task {
     </span>
     
     <span class="lnr lnr-trash"></span>`;
-    taskList.prepend(taskElement);
+    // taskList.prepend(taskElement);
     taskListArray.unshift(taskElement);
   }
 }
@@ -30,16 +31,37 @@ const renderList = function (e) {
     return;
   }
   const task = new Task(taskInput.value);
-  console.log(task);
+  // console.log(task);
   task.createTask();
   taskListObjArray.unshift(task);
   taskInput.value = "";
+
+  renderUi();
   tasksCounter();
+  // clearOne();
+  // clearOneItemHandler();
+};
+
+const renderUi = function () {
+  // if (taskListArray.length >= 0) {
+  //   taskList.innerHTML = "";
+  // }
+  taskList.innerHTML = "";
+  console.log(taskListArray);
+  for (const task of taskListArray) {
+    taskList.append(task);
+    console.log(taskList);
+  }
+  tasksCounter();
+  console.log("render");
+
+  console.log(taskList);
 };
 
 const tasksCounter = function () {
   let counter = 0;
   let todoCounter = document.querySelector(".content__todo-counter--value");
+  todoCounter.textContent = taskListArray.length;
   taskListArray.forEach((task, index) => {
     const checkbox = task.querySelector(".content__todo-list-task-checkbox");
     const cancelLine = task.querySelector(
@@ -54,10 +76,10 @@ const tasksCounter = function () {
       if (checkbox.checked) {
         cancelLine.classList.add("active");
         taskText.classList.add("disabled");
-        taskListObjArray[index].status = "completed";
+        taskListObjArray[index].status = "completed"; //e.target do indexu ??
         counter++;
         todoCounter.textContent = taskListArray.length - counter;
-        console.log(taskListObjArray);
+        // console.log(taskListObjArray);
       } else {
         if (cancelLine) {
           cancelLine.classList.remove("active");
@@ -67,19 +89,31 @@ const tasksCounter = function () {
         taskListObjArray[index].status = "active";
         counter--;
         todoCounter.textContent = taskListArray.length - counter;
-        console.log(taskListObjArray);
+        // console.log(taskListObjArray);
       }
     });
   });
 
   return todoCounter;
 };
-
-const clearAllItems = function () {
-  taskList.innerHTML = "";
+const clearOneItemHandler = function (event) {
+  if (event.target.className == "lnr lnr-trash") {
+    const trashes = [...document.querySelectorAll(".lnr-trash")];
+    const trashIndex = trashes.indexOf(event.target);
+    console.log(trashIndex);
+    taskListArray = taskListArray.filter((element, index) => {
+      return index !== trashIndex;
+    });
+    console.log(taskListArray);
+    renderUi();
+  }
+};
+const clearAllItemsHandler = function () {
   taskListArray.splice(0, taskListArray.length);
+  taskListObjArray.splice(0, taskListObjArray.length);
+  renderUi();
   tasksCounter().textContent = taskListArray.length;
 };
-
-clearAllItemsBtn.addEventListener("click", clearAllItems);
+taskList.addEventListener("click", clearOneItemHandler);
+clearAllItemsBtn.addEventListener("click", clearAllItemsHandler);
 addTaskBtn.addEventListener("click", renderList);
