@@ -79,6 +79,9 @@
         margin-left: auto;
         cursor: pointer;
       }
+      & .lnr-trash:hover {
+        color: $elementsHoverColor;
+      }
     }
   }
 
@@ -101,7 +104,7 @@
     font-family: $mainFontFamily;
     &:hover {
       cursor: pointer;
-      color: rgb(83, 83, 200);
+      color: $elementsHoverColor;
     }
   }
   &__filter-container {
