@@ -117,6 +117,9 @@
     border: 2px solid $elementsBGC;
     border-radius: 5px;
     background-color: $elementsBGC;
+    & .enabled {
+      color: $elementsHoverColor;
+    }
   }
 }
 /*mobile changes */

@@ -1,6 +1,10 @@
 const addTaskBtn = document.querySelector(".header__form-btn"),
   taskListObjArray = [],
-  clearAllItemsBtn = document.querySelector(".content__todo-btn--clear");
+  clearAllItemsBtn = document.querySelector(".content__todo-btn--clear"),
+  allBtn = document.querySelector(".content__todo-btn--all"),
+  activeBtn = document.querySelector(".content__todo-btn--active"),
+  completedBtn = document.querySelector(".content__todo-btn--completed"),
+  filterContainer = document.querySelector(".content__filter-container");
 
 let taskListArray = [],
   taskList = document.querySelector(".content__todo-list"),
@@ -23,7 +27,19 @@ class Task {
     taskListArray.unshift(taskElement);
   }
 }
+class TaskList {
+  taskClassList = [];
+  constructor(type) {
+    this.type = type;
+  }
+  addTaskToList(text) {
+    this.taskClassList.unshift(new Task(text));
+  }
+}
 
+const taskAllList = new TaskList("all");
+const taskActiveList = new TaskList("active");
+const taskCompletedList = new TaskList("completed");
 const renderList = function (e) {
   e.preventDefault();
   let taskInput = document.querySelector(".header__form-input");
@@ -31,20 +47,24 @@ const renderList = function (e) {
     alert("Insert some task to do");
     return;
   }
-  const task = new Task(taskInput.value);
+  // const task = new Task(taskInput.value);
+
   // console.log(task);
-  task.createTask();
-  taskListObjArray.unshift(task);
+  // task.createTask();
+  taskAllList.addTaskToList(taskInput.value);
+  taskAllList.taskClassList[0].createTask();
+
+  // taskListObjArray.unshift(task);
   taskInput.value = "";
-  renderUi();
+  renderUi(taskListArray);
+  globalTasksCounter(taskListArray);
 };
 
-const renderUi = function () {
+const renderUi = function (array) {
   taskList.innerHTML = "";
-  for (const task of taskListArray) {
+  for (const task of array) {
     taskList.append(task);
   }
-  globalTasksCounter();
 };
 
 const clearOneItemHandler = function (event) {
@@ -62,14 +82,18 @@ const clearOneItemHandler = function (event) {
       checkedArray.splice(0, 1);
     }
 
-    renderUi();
+    renderUi(taskListArray);
+    globalTasksCounter(taskListArray);
   }
 };
-const globalTasksCounter = function () {
-  todoCounter.textContent = taskListArray.length - checkedArray.length;
+const globalTasksCounter = function (array) {
+  todoCounter.textContent = array.length - checkedArray.length;
+};
+const filterTasksCounter = function (array) {
+  todoCounter.textContent = array.length;
 };
 
-const checkboxCounterHandler = function (event) {
+const checkboxCounterAndRenderHandler = function (event) {
   if (event.target.tagName.toLowerCase() === "input") {
     const checkboxes = [
       ...document.querySelectorAll(".content__todo-list-task-checkbox"),
@@ -84,23 +108,76 @@ const checkboxCounterHandler = function (event) {
     if (checkboxes[checkboxIndex].checked) {
       cancelLines[checkboxIndex].classList.add("active");
       taskTexts[checkboxIndex].classList.add("disabled");
+      taskAllList.taskClassList[checkboxIndex].status = "completed";
+      console.log(taskAllList);
     } else if (cancelLines[checkboxIndex]) {
       cancelLines[checkboxIndex].classList.remove("active");
       taskTexts[checkboxIndex].classList.remove("disabled");
+      taskAllList.taskClassList[checkboxIndex].status = "active";
+      console.log(taskAllList);
     }
 
     checkedArray = checkboxes.filter((element, index) => {
       return element.checked;
     });
-    globalTasksCounter();
+    globalTasksCounter(taskListArray);
   }
 };
 const clearAllItemsHandler = function () {
   taskListArray.splice(0, taskListArray.length);
   taskListObjArray.splice(0, taskListObjArray.length);
-  renderUi();
+  checkedArray = [];
+  renderUi(taskListArray);
+  globalTasksCounter(taskListArray);
 };
-taskList.addEventListener("click", checkboxCounterHandler);
+const filterTasks = function (event) {
+  if (event.target.tagName.toLowerCase() === "button") {
+    const buttons = [...filterContainer.querySelectorAll(".content__todo-btn")];
+    const btnIndex = buttons.indexOf(event.target);
+    console.log(btnIndex);
+    buttons.forEach((element, index) => {
+      if (index === btnIndex) {
+        element.classList.add("enabled");
+      } else {
+        element.classList.remove("enabled");
+      }
+    });
+
+    if (buttons[btnIndex].classList.contains("content__todo-btn--all")) {
+      renderUi(taskListArray);
+      globalTasksCounter(taskListArray);
+      console.log(taskListArray);
+    }
+
+    if (buttons[btnIndex].classList.contains("content__todo-btn--active")) {
+      let activeArr = [];
+      activeArr = taskListArray.filter((element) => {
+        const checkbox = element.querySelector(
+          ".content__todo-list-task-checkbox"
+        );
+        if (!checkbox.checked) {
+          return element;
+        }
+      });
+
+      renderUi(activeArr);
+      filterTasksCounter(activeArr);
+      console.log(activeArr);
+    }
+    if (buttons[btnIndex].classList.contains("content__todo-btn--completed")) {
+      const completedArr = [];
+      checkedArray.forEach((element) => {
+        const parent = element.parentElement;
+        completedArr.unshift(parent);
+      });
+      console.log(completedArr);
+      renderUi(completedArr);
+      filterTasksCounter(completedArr);
+    }
+  }
+};
+taskList.addEventListener("click", checkboxCounterAndRenderHandler);
 taskList.addEventListener("click", clearOneItemHandler);
 clearAllItemsBtn.addEventListener("click", clearAllItemsHandler);
 addTaskBtn.addEventListener("click", renderList);
+filterContainer.addEventListener("click", filterTasks);
