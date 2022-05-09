@@ -1,5 +1,4 @@
 const addTaskBtn = document.querySelector(".header__form-btn"),
-  taskListObjArray = [],
   clearAllItemsBtn = document.querySelector(".content__todo-btn--clear"),
   allBtn = document.querySelector(".content__todo-btn--all"),
   activeBtn = document.querySelector(".content__todo-btn--active"),
@@ -47,14 +46,8 @@ const renderList = function (e) {
     alert("Insert some task to do");
     return;
   }
-  // const task = new Task(taskInput.value);
-
-  // console.log(task);
-  // task.createTask();
   taskAllList.addTaskToList(taskInput.value);
   taskAllList.taskClassList[0].createTask();
-
-  // taskListObjArray.unshift(task);
   taskInput.value = "";
   renderUi(taskListArray);
   globalTasksCounter(taskListArray);
@@ -125,7 +118,6 @@ const checkboxCounterAndRenderHandler = function (event) {
 };
 const clearAllItemsHandler = function () {
   taskListArray.splice(0, taskListArray.length);
-  taskListObjArray.splice(0, taskListObjArray.length);
   checkedArray = [];
   renderUi(taskListArray);
   globalTasksCounter(taskListArray);
@@ -150,8 +142,7 @@ const filterTasks = function (event) {
     }
 
     if (buttons[btnIndex].classList.contains("content__todo-btn--active")) {
-      let activeArr = [];
-      activeArr = taskListArray.filter((element) => {
+      taskActiveList.taskClassList = taskListArray.filter((element) => {
         const checkbox = element.querySelector(
           ".content__todo-list-task-checkbox"
         );
@@ -160,19 +151,19 @@ const filterTasks = function (event) {
         }
       });
 
-      renderUi(activeArr);
-      filterTasksCounter(activeArr);
-      console.log(activeArr);
+      renderUi(taskActiveList.taskClassList);
+      filterTasksCounter(taskActiveList.taskClassList);
+      console.log(taskActiveList.taskClassList);
     }
     if (buttons[btnIndex].classList.contains("content__todo-btn--completed")) {
-      const completedArr = [];
+      taskCompletedList.taskClassList = [];
       checkedArray.forEach((element) => {
         const parent = element.parentElement;
-        completedArr.unshift(parent);
+        taskCompletedList.taskClassList.unshift(parent);
       });
-      console.log(completedArr);
-      renderUi(completedArr);
-      filterTasksCounter(completedArr);
+      console.log(taskCompletedList.taskClassList);
+      renderUi(taskCompletedList.taskClassList);
+      filterTasksCounter(taskCompletedList.taskClassList);
     }
   }
 };
