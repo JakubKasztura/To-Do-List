@@ -48,9 +48,14 @@ const renderList = function (e) {
   }
   taskAllList.addTaskToList(taskInput.value);
   taskAllList.taskClassList[0].createTask();
+  // taskActiveList.taskClassList = [...taskListArray];
   taskInput.value = "";
   renderUi(taskListArray);
   globalTasksCounter(taskListArray);
+  console.log();
+  allBtn.classList.add("enabled");
+  activeBtn.classList.remove("enabled");
+  completedBtn.classList.remove("enabled");
 };
 
 const renderUi = function (array) {
@@ -71,26 +76,43 @@ const clearOneItemHandler = function (event) {
     const parent = trashes[trashIndex].parentElement;
     console.log(parent);
     const checkbox = parent.querySelector(".content__todo-list-task-checkbox");
+    console.log(taskListArray);
     if (checkbox.checked) {
       checkedArray.splice(0, 1);
     }
+    // if (activeBtn.classList.contains("enabled")) {
+    //   taskActiveList.taskClassList = taskActiveList.taskClassList.filter(
+    //     (element, index) => {
+    //       return index !== trashIndex;
+    //     }
+    //   );
+    //   console.log(taskListArray);
+
+    //   renderUi(taskActiveList.taskClassList);
+    //   filterTasksCounter(taskActiveList.taskClassList);
+    //   return;
+    // }
 
     renderUi(taskListArray);
     globalTasksCounter(taskListArray);
   }
 };
 const globalTasksCounter = function (array) {
-  todoCounter.textContent = array.length - checkedArray.length;
+  todoCounter.textContent =
+    array.length - taskCompletedList.taskClassList.length;
 };
 const filterTasksCounter = function (array) {
   todoCounter.textContent = array.length;
 };
 
 const checkboxCounterAndRenderHandler = function (event) {
+  // checkedArray = [];
   if (event.target.tagName.toLowerCase() === "input") {
     const checkboxes = [
       ...document.querySelectorAll(".content__todo-list-task-checkbox"),
     ];
+    // console.log(checkboxes);
+
     const checkboxIndex = checkboxes.indexOf(event.target);
     const cancelLines = [
       ...document.querySelectorAll(".content__todo-list-task-text-cancel-line"),
@@ -98,27 +120,56 @@ const checkboxCounterAndRenderHandler = function (event) {
     const taskTexts = [
       ...document.querySelectorAll(".content__todo-list-task-text"),
     ];
+    const parentArray = [];
+    checkboxes.forEach((element) => {
+      const parent = element.parentElement;
+      parentArray.push(parent);
+    });
     if (checkboxes[checkboxIndex].checked) {
       cancelLines[checkboxIndex].classList.add("active");
       taskTexts[checkboxIndex].classList.add("disabled");
       taskAllList.taskClassList[checkboxIndex].status = "completed";
-      console.log(taskAllList);
-    } else if (cancelLines[checkboxIndex]) {
+      taskActiveList.taskClassList.splice(checkboxIndex, 1);
+      taskCompletedList.taskClassList.unshift(parentArray[checkboxIndex]);
+    } else if (!checkboxes[checkboxIndex].checked) {
       cancelLines[checkboxIndex].classList.remove("active");
       taskTexts[checkboxIndex].classList.remove("disabled");
       taskAllList.taskClassList[checkboxIndex].status = "active";
-      console.log(taskAllList);
+      taskActiveList.taskClassList.unshift(parentArray[checkboxIndex]);
+      taskCompletedList.taskClassList.splice(checkboxIndex, 1);
+    }
+    const buttons = [...filterContainer.querySelectorAll(".content__todo-btn")];
+    for (let i = 0; i < buttons.length; i++) {
+      if (
+        buttons[i].classList.contains("enabled") &&
+        buttons[i].classList.contains("content__todo-btn--active")
+      ) {
+        console.log("elo task active");
+
+        filterTasksCounter(taskActiveList.taskClassList);
+      } else if (
+        buttons[i].classList.contains("enabled") &&
+        buttons[i].classList.contains("content__todo-btn--completed")
+      ) {
+        console.log("elo task completed");
+        filterTasksCounter(taskCompletedList.taskClassList);
+      } else if (
+        buttons[i].classList.contains("enabled") &&
+        buttons[i].classList.contains("content__todo-btn--all")
+      ) {
+        console.log("elo task global");
+        globalTasksCounter(taskListArray);
+      }
     }
 
-    checkedArray = checkboxes.filter((element, index) => {
-      return element.checked;
-    });
-    globalTasksCounter(taskListArray);
+    console.log("taskCompletedArray:", taskCompletedList.taskClassList);
   }
 };
 const clearAllItemsHandler = function () {
-  taskListArray.splice(0, taskListArray.length);
-  checkedArray = [];
+  taskListArray = [];
+  taskAllList.taskClassList = [];
+  taskActiveList.taskClassList = [];
+  taskCompletedList.taskClassList = [];
   renderUi(taskListArray);
   globalTasksCounter(taskListArray);
 };
@@ -126,7 +177,7 @@ const filterTasks = function (event) {
   if (event.target.tagName.toLowerCase() === "button") {
     const buttons = [...filterContainer.querySelectorAll(".content__todo-btn")];
     const btnIndex = buttons.indexOf(event.target);
-    console.log(btnIndex);
+    // console.log(btnIndex);
     buttons.forEach((element, index) => {
       if (index === btnIndex) {
         element.classList.add("enabled");
@@ -139,28 +190,21 @@ const filterTasks = function (event) {
       renderUi(taskListArray);
       globalTasksCounter(taskListArray);
       console.log(taskListArray);
-    }
-
-    if (buttons[btnIndex].classList.contains("content__todo-btn--active")) {
+    } else if (
+      buttons[btnIndex].classList.contains("content__todo-btn--active")
+    ) {
+      taskActiveList.taskClassList = [];
       taskActiveList.taskClassList = taskListArray.filter((element) => {
-        const checkbox = element.querySelector(
-          ".content__todo-list-task-checkbox"
-        );
-        if (!checkbox.checked) {
-          return element;
-        }
+        return !element.querySelector(".content__todo-list-task-checkbox")
+          .checked;
       });
-
+      console.log(taskActiveList);
       renderUi(taskActiveList.taskClassList);
       filterTasksCounter(taskActiveList.taskClassList);
-      console.log(taskActiveList.taskClassList);
-    }
-    if (buttons[btnIndex].classList.contains("content__todo-btn--completed")) {
-      taskCompletedList.taskClassList = [];
-      checkedArray.forEach((element) => {
-        const parent = element.parentElement;
-        taskCompletedList.taskClassList.unshift(parent);
-      });
+      // console.log(taskActiveList.taskClassList);
+    } else if (
+      buttons[btnIndex].classList.contains("content__todo-btn--completed")
+    ) {
       console.log(taskCompletedList.taskClassList);
       renderUi(taskCompletedList.taskClassList);
       filterTasksCounter(taskCompletedList.taskClassList);
