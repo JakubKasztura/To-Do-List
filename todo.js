@@ -125,18 +125,32 @@ const checkboxCounterAndRenderHandler = function (event) {
       const parent = element.parentElement;
       parentArray.push(parent);
     });
+    console.log(checkboxes);
+
     if (checkboxes[checkboxIndex].checked) {
       cancelLines[checkboxIndex].classList.add("active");
       taskTexts[checkboxIndex].classList.add("disabled");
       taskAllList.taskClassList[checkboxIndex].status = "completed";
-      taskActiveList.taskClassList.splice(checkboxIndex, 1);
+      const taskActiveListCheckedIndex = taskActiveList.taskClassList.indexOf(
+        parentArray[checkboxIndex]
+      );
+      taskActiveList.taskClassList.splice(taskActiveListCheckedIndex, 1);
       taskCompletedList.taskClassList.unshift(parentArray[checkboxIndex]);
     } else if (!checkboxes[checkboxIndex].checked) {
       cancelLines[checkboxIndex].classList.remove("active");
       taskTexts[checkboxIndex].classList.remove("disabled");
       taskAllList.taskClassList[checkboxIndex].status = "active";
       taskActiveList.taskClassList.unshift(parentArray[checkboxIndex]);
-      taskCompletedList.taskClassList.splice(checkboxIndex, 1);
+      console.log(
+        taskCompletedList.taskClassList.indexOf(parentArray[checkboxIndex])
+      );
+      const taskCompletedListUncheckedIndex =
+        taskCompletedList.taskClassList.indexOf(parentArray[checkboxIndex]);
+      taskCompletedList.taskClassList.splice(
+        taskCompletedListUncheckedIndex,
+        1
+      );
+      console.log("checkboxindex rmv input", checkboxIndex);
     }
     const buttons = [...filterContainer.querySelectorAll(".content__todo-btn")];
     for (let i = 0; i < buttons.length; i++) {
