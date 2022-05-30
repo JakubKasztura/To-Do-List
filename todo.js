@@ -3,12 +3,13 @@ const addTaskBtn = document.querySelector(".header__form-btn"),
   allBtn = document.querySelector(".content__todo-btn--all"),
   activeBtn = document.querySelector(".content__todo-btn--active"),
   completedBtn = document.querySelector(".content__todo-btn--completed"),
-  filterContainer = document.querySelector(".content__filter-container");
+  filterContainer = document.querySelector(".content__filter-container"),
+  buttons = [...filterContainer.querySelectorAll(".content__todo-btn")];
 
 let taskListArray = [],
   taskList = document.querySelector(".content__todo-list"),
-  todoCounter = document.querySelector(".content__todo-counter--value"),
-  checkedArray = [];
+  todoCounter = document.querySelector(".content__todo-counter--value");
+
 class Task {
   constructor(text) {
     this.text = text;
@@ -48,7 +49,8 @@ const renderList = function (e) {
   }
   taskAllList.addTaskToList(taskInput.value);
   taskAllList.taskClassList[0].createTask();
-  // taskActiveList.taskClassList = [...taskListArray];
+  taskAllList.taskClassList = [...taskListArray];
+
   taskInput.value = "";
   renderUi(taskListArray);
   globalTasksCounter(taskListArray);
@@ -69,32 +71,59 @@ const clearOneItemHandler = function (event) {
   if (event.target.className == "lnr lnr-trash") {
     const trashes = [...document.querySelectorAll(".lnr-trash")];
     const trashIndex = trashes.indexOf(event.target);
-    console.log(trashIndex);
-    taskListArray = taskListArray.filter((element, index) => {
-      return index !== trashIndex;
+    console.log("trashindex:", trashIndex);
+    const parentArray = [];
+    trashes.forEach((element) => {
+      const parent = element.parentElement;
+      parentArray.push(parent);
     });
-    const parent = trashes[trashIndex].parentElement;
-    console.log(parent);
-    const checkbox = parent.querySelector(".content__todo-list-task-checkbox");
-    console.log(taskListArray);
-    if (checkbox.checked) {
-      checkedArray.splice(0, 1);
+    const taskActiveListCheckedIndex = taskActiveList.taskClassList.indexOf(
+      parentArray[trashIndex]
+    );
+    const taskCompletedListCheckedIndex =
+      taskCompletedList.taskClassList.indexOf(parentArray[trashIndex]);
+
+    for (let i = 0; i < buttons.length; i++) {
+      if (
+        buttons[i].classList.contains("enabled") &&
+        buttons[i].classList.contains("content__todo-btn--active")
+      ) {
+        console.log("elo task active");
+        taskListArray.splice(trashIndex, 1);
+        taskAllList.taskClassList.splice(trashIndex, 1);
+        taskActiveList.taskClassList.splice(taskActiveListCheckedIndex, 1);
+        renderUi(taskActiveList.taskClassList);
+        filterTasksCounter(taskActiveList.taskClassList);
+      } else if (
+        buttons[i].classList.contains("enabled") &&
+        buttons[i].classList.contains("content__todo-btn--completed")
+      ) {
+        console.log("elo task completed");
+        taskListArray.splice(trashIndex, 1);
+        taskAllList.taskClassList.splice(trashIndex, 1);
+        taskCompletedList.taskClassList.splice(
+          taskCompletedListCheckedIndex,
+          1
+        );
+        renderUi(taskCompletedList.taskClassList);
+        filterTasksCounter(taskCompletedList.taskClassList);
+      } else if (
+        buttons[i].classList.contains("enabled") &&
+        buttons[i].classList.contains("content__todo-btn--all")
+      ) {
+        console.log("elo task global");
+        taskListArray.splice(trashIndex, 1);
+        taskAllList.taskClassList.splice(trashIndex, 1);
+        taskCompletedList.taskClassList.splice(
+          taskCompletedListCheckedIndex,
+          1
+        );
+        taskActiveList.taskClassList.splice(taskActiveListCheckedIndex, 1);
+        console.log(taskAllList.taskClassList);
+        renderUi(taskAllList.taskClassList);
+        globalTasksCounter(taskAllList.taskClassList);
+      }
     }
-    // if (activeBtn.classList.contains("enabled")) {
-    //   taskActiveList.taskClassList = taskActiveList.taskClassList.filter(
-    //     (element, index) => {
-    //       return index !== trashIndex;
-    //     }
-    //   );
-    //   console.log(taskListArray);
-
-    //   renderUi(taskActiveList.taskClassList);
-    //   filterTasksCounter(taskActiveList.taskClassList);
-    //   return;
-    // }
-
-    renderUi(taskListArray);
-    globalTasksCounter(taskListArray);
   }
 };
 const globalTasksCounter = function (array) {
@@ -106,7 +135,6 @@ const filterTasksCounter = function (array) {
 };
 
 const checkboxCounterAndRenderHandler = function (event) {
-  // checkedArray = [];
   if (event.target.tagName.toLowerCase() === "input") {
     const checkboxes = [
       ...document.querySelectorAll(".content__todo-list-task-checkbox"),
@@ -152,7 +180,7 @@ const checkboxCounterAndRenderHandler = function (event) {
       );
       console.log("checkboxindex rmv input", checkboxIndex);
     }
-    const buttons = [...filterContainer.querySelectorAll(".content__todo-btn")];
+
     for (let i = 0; i < buttons.length; i++) {
       if (
         buttons[i].classList.contains("enabled") &&
@@ -161,18 +189,21 @@ const checkboxCounterAndRenderHandler = function (event) {
         console.log("elo task active");
 
         filterTasksCounter(taskActiveList.taskClassList);
+        renderUi(taskActiveList.taskClassList);
       } else if (
         buttons[i].classList.contains("enabled") &&
         buttons[i].classList.contains("content__todo-btn--completed")
       ) {
         console.log("elo task completed");
         filterTasksCounter(taskCompletedList.taskClassList);
+        renderUi(taskCompletedList.taskClassList);
       } else if (
         buttons[i].classList.contains("enabled") &&
         buttons[i].classList.contains("content__todo-btn--all")
       ) {
         console.log("elo task global");
-        globalTasksCounter(taskListArray);
+        globalTasksCounter(taskAllList.taskClassList);
+        renderUi(taskAllList.taskClassList);
       }
     }
 
@@ -189,7 +220,6 @@ const clearAllItemsHandler = function () {
 };
 const filterTasks = function (event) {
   if (event.target.tagName.toLowerCase() === "button") {
-    const buttons = [...filterContainer.querySelectorAll(".content__todo-btn")];
     const btnIndex = buttons.indexOf(event.target);
     // console.log(btnIndex);
     buttons.forEach((element, index) => {
