@@ -5,6 +5,12 @@
     background-color: $elementsBGC;
     border: 2px solid $elementsBGC;
     border-radius: 5px;
+    transition: 0.7s;
+    &.bright {
+      background-color: $brightElementsBGC;
+      border-width: 1px;
+      border-color: $brightElementsBorderColor;
+    }
   }
   // &__title,
   // &__todo-info,
@@ -16,10 +22,16 @@
     text-align: center;
     /* background-color: #fff; */
     color: $brightFontColor;
+    &.bright {
+      color: $brightThemeFontColor;
+    }
   }
   &__todo-list {
     list-style: none;
     color: $brightFontColor;
+    &.bright {
+      color: $brightThemeFontColor;
+    }
     &-task {
       display: flex;
       flex-direction: row;
@@ -29,6 +41,9 @@
       border-bottom: 1px solid $elementsBorderColor;
       padding: 10px 20px;
       font-size: 1.2em;
+      &.bright {
+        border-bottom-color: $brightElementsBorderColor;
+      }
       &-checkbox {
         position: relative;
         margin-right: 15px;
@@ -94,6 +109,10 @@
     border-top: 1px solid $elementsBorderColor;
     /* background-color: #fff; */
     color: $elementsFontColor;
+    &.bright {
+      border-top-color: $brightElementsBorderColor;
+      color: $brightThemeFontColor;
+    }
   }
   &__todo-btn {
     color: $elementsFontColor;
@@ -106,6 +125,12 @@
       cursor: pointer;
       color: $elementsHoverColor;
     }
+    &.bright {
+      color: $brightThemeFontColor;
+    }
+    &.bright:hover {
+      color: $brightElementsHoverColor;
+    }
   }
   &__filter-container {
     display: flex;
@@ -117,8 +142,14 @@
     border: 2px solid $elementsBGC;
     border-radius: 5px;
     background-color: $elementsBGC;
+    transition: 0.7s;
     & .enabled {
       color: $elementsHoverColor;
+    }
+    &.bright {
+      border-color: $brightElementsBorderColor;
+      border-width: 1px;
+      background-color: $brightElementsBGC;
     }
   }
 }

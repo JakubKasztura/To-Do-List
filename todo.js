@@ -4,7 +4,9 @@ const addTaskBtn = document.querySelector(".header__form-btn"),
   activeBtn = document.querySelector(".content__todo-btn--active"),
   completedBtn = document.querySelector(".content__todo-btn--completed"),
   filterContainer = document.querySelector(".content__filter-container"),
-  buttons = [...filterContainer.querySelectorAll(".content__todo-btn")];
+  buttons = [...filterContainer.querySelectorAll(".content__todo-btn")],
+  darkThemeIcon = document.querySelector(".lnr-moon"),
+  brightThemeIcon = document.querySelector(".lnr-sun");
 
 let taskList = document.querySelector(".content__todo-list"),
   todoCounter = document.querySelector(".content__todo-counter--value");
@@ -261,8 +263,37 @@ const filterActiveAndCompletedArrays = function () {
     (element) => element.status === "active"
   );
 };
+const wrapperContainer = document.querySelector(".wrapper");
+const headerFormContainer = document.querySelector(".header__form-container");
+const headerFormInput = document.querySelector(".header__form-input");
+const contentContainer = document.querySelector(".content__tasks-container");
+const contentTitle = document.querySelector(".content__title");
+const contentTodoInfo = document.querySelector(".content__todo-info");
+const footer = document.querySelector(".footer");
+const brightThemeSwitch = function () {
+  if (taskAllList.taskClassList.length > 0) {
+    const taskElements = [
+      ...taskList.querySelectorAll(".content__todo-list-task"),
+    ];
+    for (const task of taskElements) {
+      task.classList.toggle("bright");
+    }
+  }
+  wrapperContainer.classList.toggle("bright");
+  headerFormContainer.classList.toggle("bright");
+  headerFormInput.classList.toggle("bright");
+  addTaskBtn.classList.toggle("bright");
+  contentContainer.classList.toggle("bright");
+  contentTitle.classList.toggle("bright");
+  contentTodoInfo.classList.toggle("bright");
+  taskList.classList.toggle("bright");
+  clearAllItemsBtn.classList.toggle("bright");
+  filterContainer.classList.toggle("bright");
+  footer.classList.toggle("bright");
+};
 taskList.addEventListener("click", checkboxCounterAndRenderHandler);
 taskList.addEventListener("click", clearOneItemHandler);
 clearAllItemsBtn.addEventListener("click", clearAllItemsHandler);
 addTaskBtn.addEventListener("click", renderList);
 filterContainer.addEventListener("click", filterTasks);
+brightThemeIcon.addEventListener("click", brightThemeSwitch);

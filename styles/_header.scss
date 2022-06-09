@@ -32,6 +32,7 @@
   & .lnr {
     display: block;
     font-size: 2em;
+    cursor: pointer;
     &--disabled {
       position: absolute;
       top: 0;
@@ -48,6 +49,11 @@
     border: 2px solid $elementsBGC;
     border-radius: 5px;
     background-color: $elementsBGC;
+    transition: 0.7s;
+    &.bright {
+      border-color: $brightElementsBorderColor;
+      background-color: $brightElementsBGC;
+    }
   }
   &__form-input,
   &__form-btn {
@@ -55,6 +61,10 @@
     font-size: 1em;
     color: $brightFontColor;
     border: none;
+    transition: 0.7s;
+    &.bright {
+      color: $brightThemeFontColor;
+    }
   }
   &__form-input {
     flex-grow: 2;
@@ -75,6 +85,9 @@
     background-color: $backgroundBGC;
     &:hover {
       cursor: pointer;
+    }
+    &.bright {
+      background-color: $brightAddBtnColor;
     }
   }
 }

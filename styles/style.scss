@@ -25,7 +25,12 @@ html {
   min-height: 100vh;
   background-color: $backgroundBGC;
   overflow: hidden;
+  transition: 0.7s;
+  &.bright {
+    background-color: $brightBackgroundBGC;
+  }
 }
+
 .header,
 .content {
   z-index: 1;
