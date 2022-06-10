@@ -7,9 +7,9 @@ const addTaskBtn = document.querySelector(".header__form-btn"),
   buttons = [...filterContainer.querySelectorAll(".content__todo-btn")],
   themeIconsContainer = document.querySelector(
     ".header__theme-icons-container"
-  );
-(darkThemeIcon = document.querySelector(".lnr-moon")),
-  (brightThemeIcon = document.querySelector(".lnr-sun"));
+  ),
+  darkThemeIcon = document.querySelector(".lnr-moon"),
+  brightThemeIcon = document.querySelector(".lnr-sun");
 
 let taskList = document.querySelector(".content__todo-list"),
   todoCounter = document.querySelector(".content__todo-counter--value");
@@ -70,6 +70,17 @@ const renderList = function (e) {
   taskActiveList.taskClassList = taskAllList.taskClassList.filter(
     (element) => element.status === "active"
   );
+  if (!brightThemeIcon.classList.contains("lnr--disabled")) {
+    taskAllList.taskClassList[0].DOMelement.classList.remove("bright");
+    taskAllList.taskClassList[0].DOMelement.querySelector(
+      ".content__todo-list-task-checkbox"
+    ).classList.remove("bright");
+  } else {
+    taskAllList.taskClassList[0].DOMelement.classList.add("bright");
+    taskAllList.taskClassList[0].DOMelement.querySelector(
+      ".content__todo-list-task-checkbox"
+    ).classList.add("bright");
+  }
 };
 
 const renderUi = function (array) {
@@ -298,6 +309,22 @@ const brightThemeSwitch = function () {
   clearAllItemsBtn.classList.toggle("bright");
   filterContainer.classList.toggle("bright");
   footer.classList.toggle("bright");
+  if (!brightThemeIcon.classList.contains("lnr--disabled")) {
+    for (const task of taskAllList.taskClassList) {
+      task.DOMelement.classList.remove("bright");
+      task.DOMelement.querySelector(
+        ".content__todo-list-task-checkbox"
+      ).classList.remove("bright");
+      console.log(task.DOMelement);
+    }
+  } else {
+    for (const task of taskAllList.taskClassList) {
+      task.DOMelement.classList.add("bright");
+      task.DOMelement.querySelector(
+        ".content__todo-list-task-checkbox"
+      ).classList.add("bright");
+    }
+  }
 };
 taskList.addEventListener("click", checkboxCounterAndRenderHandler);
 taskList.addEventListener("click", clearOneItemHandler);

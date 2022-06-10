@@ -47,6 +47,11 @@
       &-checkbox {
         position: relative;
         margin-right: 15px;
+        transition: 0.4s;
+        &.bright::before {
+          background-color: $brightElementsBGC;
+          border-color: $brightElementsBorderColor;
+        }
       }
       &-checkbox:hover::before {
         cursor: pointer;
@@ -63,6 +68,10 @@
         border-radius: 50%;
         width: 140%;
         height: 140%;
+      }
+      &-checkbox::before .bright {
+        background-color: $brightElementsBGC;
+        border-color: $brightElementsBorderColor;
       }
 
       &-checkbox:checked::before {
