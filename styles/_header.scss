@@ -7,6 +7,7 @@
   flex-wrap: wrap;
   width: $elementWidthSmallMobile;
   padding: 36px 0;
+
   /* background-color: rgba(255, 0, 0, 0.4); */
   &::before {
     content: "";
@@ -33,12 +34,18 @@
     display: block;
     font-size: 2em;
     cursor: pointer;
+    opacity: 1;
+    transition: 0.7s;
     &--disabled {
       position: absolute;
       top: 0;
       left: 0;
-      display: none;
+      display: block;
+      opacity: 0;
     }
+  }
+  & .lnr:before {
+    transition: 4s;
   }
   &__form-container {
     display: flex;

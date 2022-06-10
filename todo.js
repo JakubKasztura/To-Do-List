@@ -5,8 +5,11 @@ const addTaskBtn = document.querySelector(".header__form-btn"),
   completedBtn = document.querySelector(".content__todo-btn--completed"),
   filterContainer = document.querySelector(".content__filter-container"),
   buttons = [...filterContainer.querySelectorAll(".content__todo-btn")],
-  darkThemeIcon = document.querySelector(".lnr-moon"),
-  brightThemeIcon = document.querySelector(".lnr-sun");
+  themeIconsContainer = document.querySelector(
+    ".header__theme-icons-container"
+  );
+(darkThemeIcon = document.querySelector(".lnr-moon")),
+  (brightThemeIcon = document.querySelector(".lnr-sun"));
 
 let taskList = document.querySelector(".content__todo-list"),
   todoCounter = document.querySelector(".content__todo-counter--value");
@@ -279,6 +282,11 @@ const brightThemeSwitch = function () {
       task.classList.toggle("bright");
     }
   }
+  for (const filterButton of buttons) {
+    filterButton.classList.toggle("bright");
+  }
+  brightThemeIcon.classList.toggle("lnr--disabled");
+  darkThemeIcon.classList.toggle("lnr--disabled");
   wrapperContainer.classList.toggle("bright");
   headerFormContainer.classList.toggle("bright");
   headerFormInput.classList.toggle("bright");
@@ -296,4 +304,4 @@ taskList.addEventListener("click", clearOneItemHandler);
 clearAllItemsBtn.addEventListener("click", clearAllItemsHandler);
 addTaskBtn.addEventListener("click", renderList);
 filterContainer.addEventListener("click", filterTasks);
-brightThemeIcon.addEventListener("click", brightThemeSwitch);
+themeIconsContainer.addEventListener("click", brightThemeSwitch);
