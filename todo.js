@@ -9,7 +9,14 @@ const addTaskBtn = document.querySelector(".header__form-btn"),
     ".header__theme-icons-container"
   ),
   darkThemeIcon = document.querySelector(".lnr-moon"),
-  brightThemeIcon = document.querySelector(".lnr-sun");
+  brightThemeIcon = document.querySelector(".lnr-sun"),
+  wrapperContainer = document.querySelector(".wrapper"),
+  headerFormContainer = document.querySelector(".header__form-container"),
+  headerFormInput = document.querySelector(".header__form-input"),
+  contentContainer = document.querySelector(".content__tasks-container"),
+  contentTitle = document.querySelector(".content__title"),
+  contentTodoInfo = document.querySelector(".content__todo-info"),
+  footer = document.querySelector(".footer");
 
 let taskList = document.querySelector(".content__todo-list"),
   todoCounter = document.querySelector(".content__todo-counter--value");
@@ -277,13 +284,7 @@ const filterActiveAndCompletedArrays = function () {
     (element) => element.status === "active"
   );
 };
-const wrapperContainer = document.querySelector(".wrapper");
-const headerFormContainer = document.querySelector(".header__form-container");
-const headerFormInput = document.querySelector(".header__form-input");
-const contentContainer = document.querySelector(".content__tasks-container");
-const contentTitle = document.querySelector(".content__title");
-const contentTodoInfo = document.querySelector(".content__todo-info");
-const footer = document.querySelector(".footer");
+
 const brightThemeSwitch = function () {
   if (taskAllList.taskClassList.length > 0) {
     const taskElements = [

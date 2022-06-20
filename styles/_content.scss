@@ -123,6 +123,9 @@
       color: $brightThemeFontColor;
     }
   }
+  &__todo-counter {
+    padding: 6px 20px;
+  }
   &__todo-btn {
     color: $elementsFontColor;
     border: none;
